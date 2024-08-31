@@ -16,6 +16,7 @@
   <table *ngIf="!isLoading" class="min-w-full mt-4 border border-border">
     <thead class="bg-muted">
       <tr>
+        <th class="border border-border p-2 text-left">Image</th>
         <th class="border border-border p-2 text-left">ID</th>
         <th class="border border-border p-2 text-left">Name</th>
         <th class="border border-border p-2 text-left">Description</th>
@@ -26,10 +27,14 @@
         <th class="border border-border p-2 text-left">Category</th>
         <th class="border border-border p-2 text-left">Warehouse</th>
         <th class="border border-border p-2 text-left">Expiry Date</th>
+        <th class="border border-border p-2 text-left">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of products | async">
+        <td class="border border-border p-2">
+          <img [src]="product.imageUrl" alt="{{product.name}}" class="w-16 h-16 object-cover rounded-md">
+        </td>
         <td class="border border-border p-2">{{product.id}}</td>
         <td class="border border-border p-2">{{product.name}}</td>
         <td class="border border-border p-2">{{product.description}}</td>
@@ -40,6 +45,11 @@
         <td class="border border-border p-2">{{product.category}}</td>
         <td class="border border-border p-2">{{product.warehouse}}</td>
         <td class="border border-border p-2">{{product.expiryDate}}</td>
+        <td class="border border-border p-2">
+          <button (click)="viewProduct(product)" class="bg-white text-gray-800 px-2 py-1 rounded-md border border-gray-300 hover:bg-gray-100 transition mr-1">View</button>
+          <button (click)="editProduct(product)" class="bg-yellow-500 text-white px-2 py-1 rounded-md hover:bg-yellow-600 transition mr-1">Edit</button>
+          <button (click)="deleteProduct(product.id)" class="bg-red-600 text-white px-2 py-1 rounded-md hover:bg-red-700 transition">Delete</button>
+        </td>
       </tr>
     </tbody>
   </table>
