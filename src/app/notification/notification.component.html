@@ -1,0 +1,11 @@
+<div *ngIf="message" class="fixed top-4 right-4 p-4 bg-white border rounded shadow-lg max-w-sm z-60">
+  <div class="flex items-start">
+    <div class="mr-3 text-xl">
+      <span [ngClass]="{'text-green-500': messageType === 'success', 'text-red-500': messageType === 'error'}">{{ icon }}</span>
+    </div>
+    <div>
+      <h2 class="font-semibold text-lg" [ngClass]="{'text-green-500': messageType === 'success', 'text-red-500': messageType === 'error'}">{{ title }}</h2>
+      <p class="text-sm">{{ message }}</p>
+    </div>
+  </div>
+</div>
