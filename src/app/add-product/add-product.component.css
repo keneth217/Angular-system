@@ -1,0 +1,9 @@
+/* styles.css or component-specific CSS */
+.bg-card {
+  background-color: #fff; /* Adjust as needed */
+}
+
+/* To ensure the blur effect */
+.backdrop-blur-sm {
+  backdrop-filter: blur(10px);
+}
