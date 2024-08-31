@@ -1,0 +1,46 @@
+<div class="p-4 bg-card">
+  <!-- Button to toggle Add Product form -->
+  <button (click)="toggleAddProductForm()" class="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-primary/80 transition">Add Product</button>
+
+  <!-- Conditional display of AddProductComponent with backdrop blur -->
+  <div *ngIf="showAddProductForm" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+    <app-add-product (closeForm)="toggleAddProductForm()"></app-add-product>
+  </div>
+
+  <!-- Loading Text -->
+  <div *ngIf="isLoading" class="text-center text-blue-500 mt-4">
+    <p>Loading products...</p>
+  </div>
+
+  <!-- Product List Table -->
+  <table *ngIf="!isLoading" class="min-w-full mt-4 border border-border">
+    <thead class="bg-muted">
+      <tr>
+        <th class="border border-border p-2 text-left">ID</th>
+        <th class="border border-border p-2 text-left">Name</th>
+        <th class="border border-border p-2 text-left">Description</th>
+        <th class="border border-border p-2 text-left">Cost Price</th>
+        <th class="border border-border p-2 text-left">Selling Price</th>
+        <th class="border border-border p-2 text-left">Qty</th>
+        <th class="border border-border p-2 text-left">Supplier</th>
+        <th class="border border-border p-2 text-left">Category</th>
+        <th class="border border-border p-2 text-left">Warehouse</th>
+        <th class="border border-border p-2 text-left">Expiry Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products | async">
+        <td class="border border-border p-2">{{product.id}}</td>
+        <td class="border border-border p-2">{{product.name}}</td>
+        <td class="border border-border p-2">{{product.description}}</td>
+        <td class="border border-border p-2">{{product.costPrice}}</td>
+        <td class="border border-border p-2">{{product.sellingPrice}}</td>
+        <td class="border border-border p-2">{{product.qty}}</td>
+        <td class="border border-border p-2">{{product.supplier}}</td>
+        <td class="border border-border p-2">{{product.category}}</td>
+        <td class="border border-border p-2">{{product.warehouse}}</td>
+        <td class="border border-border p-2">{{product.expiryDate}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
