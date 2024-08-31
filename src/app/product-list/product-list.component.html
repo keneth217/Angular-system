@@ -7,6 +7,16 @@
     <app-add-product (closeForm)="toggleAddProductForm()"></app-add-product>
   </div>
 
+   <!-- Conditional display of ProductViewComponent -->
+   <div *ngIf="showViewProduct && selectedProduct" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+    <app-product-view [product]="selectedProduct" (close)="showViewProduct = false"></app-product-view>
+  </div>
+
+  <!-- Conditional display of ProductEditComponent -->
+  <div *ngIf="showEditProduct && selectedProduct" class="fixed inset-0 flex items-center justify-center z-100 bg-black bg-opacity-50 backdrop-blur-sm">
+    <app-product-edit [product]="selectedProduct" (save)="updateProduct($event)" (close)="showEditProduct = false"></app-product-edit>
+  </div>
+
   <!-- Loading Text -->
   <div *ngIf="isLoading" class="text-center text-blue-500 mt-4">
     <p>Loading products...</p>
