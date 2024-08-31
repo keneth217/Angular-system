@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Product } from '../../models/products.model';
  // Adjust import based on your project structure
 
 @Component({
   selector: 'app-product-edit',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,ReactiveFormsModule,FormsModule],
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css']
 })
