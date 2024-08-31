@@ -1,0 +1,19 @@
+<div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+  <div class="bg-card rounded-lg shadow-lg p-6 w-96 max-h-full overflow-y-auto">
+    <h2 class="text-lg font-semibold mb-4">Product Details</h2>
+    <div class="mb-4">
+      <img [src]="product.imageUrl" alt="{{product.name}}" class="w-full h-32 object-cover rounded-md mb-4">
+      <p><strong>ID:</strong> {{product.id}}</p>
+      <p><strong>Name:</strong> {{product.name}}</p>
+      <p><strong>Description:</strong> {{product.description}}</p>
+      <p><strong>Cost Price:</strong> {{product.costPrice}}</p>
+      <p><strong>Selling Price:</strong> {{product.sellingPrice}}</p>
+      <p><strong>Qty:</strong> {{product.qty}}</p>
+      <p><strong>Supplier:</strong> {{product.supplier}}</p>
+      <p><strong>Category:</strong> {{product.category}}</p>
+      <p><strong>Warehouse:</strong> {{product.warehouse}}</p>
+      <p><strong>Expiry Date:</strong> {{product.expiryDate}}</p>
+    </div>
+    <button (click)="closeView()" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition">Close</button>
+  </div>
+</div>
