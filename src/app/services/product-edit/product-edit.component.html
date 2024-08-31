@@ -1,0 +1,18 @@
+<div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+  <div class="bg-card rounded-lg shadow-lg p-6 w-96 max-h-full overflow-y-auto">
+    <h2 class="text-lg font-semibold mb-4">Edit Product</h2>
+    <form [formGroup]="productForm">
+      <!-- Add form fields similar to AddProductComponent -->
+      <div class="mb-4">
+        <label for="name">Name</label>
+        <input id="name" formControlName="name" type="text" class="mt-1 block w-full border border-border rounded-md p-2"/>
+      </div>
+      <!-- Add other form fields similarly -->
+      <div class="flex justify-between">
+        <button type="button" (click)="closeEdit()" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition">Cancel</button>
+        <button type="button" (click)="saveProduct()" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
