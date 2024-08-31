@@ -1,0 +1,84 @@
+<!-- Notification Component should be placed first -->
+<app-notification [message]="message" [messageType]="messageType" [title]="title"></app-notification>
+
+<div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+  <div class="bg-card rounded-lg shadow-lg p-6 w-96 max-h-full overflow-y-auto z-50">
+    <h2 class="text-lg font-semibold mb-4">Add Product</h2>
+    <form (submit)="onSubmit(productForm)" #productForm="ngForm">
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="product-batch">Product Batch</label>
+        <input type="text" id="product-batch" [ngClass]="inputClasses" placeholder="e.g. July 2023" name="productBatch" ngModel />
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="product-image">Product Image</label>
+        <input type="file" id="product-image" [ngClass]="inputClasses" (change)="onFileSelected($event)" />
+        <div *ngIf="imagePreviewUrl" class="mt-2">
+          <img [src]="imagePreviewUrl" alt="Image Preview" class="max-w-full h-auto rounded">
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="product-name">Product Name</label>
+        <input type="text" id="product-name" [ngClass]="inputClasses" placeholder="e.g. T-Shirt" name="productName" ngModel />
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="product-description">Product Description</label>
+        <input type="text" id="product-description" [ngClass]="inputClasses" placeholder="e.g. Men T-Shirt" name="productDescription" ngModel />
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="cost-price">Cost Price</label>
+        <input type="text" id="cost-price" [ngClass]="inputClasses" placeholder="e.g. N2000" name="costPrice" ngModel />
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="selling-price">Selling Price</label>
+        <input type="text" id="selling-price" [ngClass]="inputClasses" placeholder="e.g. N2500" name="sellingPrice" ngModel />
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="qty">Qty (Cartons)</label>
+        <input type="text" id="qty" [ngClass]="inputClasses" placeholder="e.g. 10" name="qty" ngModel />
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="supplier">Supplier</label>
+        <select id="supplier" [ngClass]="inputClasses" name="supplier" ngModel>
+          <option value="" disabled selected>Choose...</option>
+          <option>Supplier 1</option>
+          <option>Supplier 2</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="category">Category</label>
+        <select id="category" [ngClass]="inputClasses" name="category" ngModel>
+          <option value="" disabled selected>Choose...</option>
+          <option>Category 1</option>
+          <option>Category 2</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="warehouse">Warehouse</label>
+        <select id="warehouse" [ngClass]="inputClasses" name="warehouse" ngModel>
+          <option value="" disabled selected>Choose...</option>
+          <option>Warehouse 1</option>
+          <option>Warehouse 2</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="expiry-date">Expiry Date</label>
+        <input type="date" id="expiry-date" [ngClass]="inputClasses" name="expiryDate" ngModel />
+      </div>
+
+      <div class="flex justify-between">
+        <button type="button" class="bg-red-600" [ngClass]="buttonClasses + ' ' + cancelButtonClasses" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="bg-green-600" [ngClass]="buttonClasses + ' ' + submitButtonClasses">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
