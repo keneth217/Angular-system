@@ -5,12 +5,12 @@ import { AddProductComponent } from '../add-product/add-product.component';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { Observable } from 'rxjs';
 import { ProductEditComponent } from '../services/product-edit/product-edit.component';
-import { ProductViewComponent } from '../services/product-view/product-view.component';
+import { ProductViewComponent } from "../services/product-view/product-view.component";
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, AddProductComponent, ProductEditComponent, ProductViewComponent],
+  imports: [CommonModule, AddProductComponent, ProductEditComponent, ProductEditComponent, ProductViewComponent],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
