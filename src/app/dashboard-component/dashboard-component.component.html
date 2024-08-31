@@ -1,0 +1,41 @@
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-black">
+  <app-card-component title="Today Sales" value="₦4,987.50"></app-card-component>
+  <app-card-component title="Expired" value="0"></app-card-component>
+  <app-card-component title="Today Invoice" value="1"></app-card-component>
+  <app-card-component title="New Products" value="5"></app-card-component>
+  <app-card-component title="Current Month Sales" value="₦4,987.50"></app-card-component>
+  <app-card-component title="Users" value="2"></app-card-component>
+  <app-card-component title="Stores" value="1"></app-card-component>
+</div>
+<section class="mt-8">
+  <h2 class="text-lg font-semibold text-muted">Today's (Wednesday 12th July, 2023) Transactions</h2>
+  <table class="min-w-full mt-4 border border-border">
+    <thead class="bg-muted">
+      <tr>
+        <th class="border border-border p-2 text-left">Order ID</th>
+        <th class="border border-border p-2 text-left">Customer</th>
+        <th class="border border-border p-2 text-left">Payment</th>
+        <th class="border border-border p-2 text-left">Amount</th>
+        <th class="border border-border p-2 text-left">Attendant</th>
+        <th class="border border-border p-2 text-left">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-muted transition">
+        <td class="border border-border p-2">INV-000001</td>
+        <td class="border border-border p-2">Guest</td>
+        <td class="border border-border p-2">Cash</td>
+        <td class="border border-border p-2">₦4,987.50</td>
+        <td class="border border-border p-2">Smith</td>
+        <td class="border border-border p-2">Paid</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mt-4">
+    <span class="text-muted">Showing 1 to 1 of 1 entries</span>
+    <div class="flex justify-between mt-2">
+      <button class="bg-primary text-primary-foreground p-2 rounded hover:bg-primary/80 transition">Previous</button>
+      <button class="bg-primary text-primary-foreground p-2 rounded hover:bg-primary/80 transition">Next</button>
+    </div>
+  </div>
+</section>
