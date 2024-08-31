@@ -1,1 +1,28 @@
-<p>add-store works!</p>
+<div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+  <div class="bg-card rounded-lg shadow-lg p-6 w-96 max-h-full overflow-y-auto">
+    <h2 class="text-lg font-semibold mb-4">Add Store</h2>
+    <form [formGroup]="storeForm" (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="store-no">Store No</label>
+        <input type="text" id="store-no" [ngClass]="inputClasses" placeholder="e.g. 001" formControlName="storeNo" />
+      </div>
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="store-name">Store Name</label>
+        <input type="text" id="store-name" [ngClass]="inputClasses" placeholder="e.g. Nemsy 1" formControlName="storeName" />
+      </div>
+      <div class="mb-4">
+        <label [ngClass]="labelClasses" for="location">Location</label>
+        <select id="location" [ngClass]="inputClasses" formControlName="location">
+          <option value="" disabled selected>Choose...</option>
+          <option value="NAkuru">NAkuru</option>
+          <option value="Bomet">Bomet</option>
+        </select>
+      </div>
+      <div class="flex justify-between">
+        <button type="button" class="bg-red-600" [ngClass]="buttonClasses + ' ' + cancelButtonClasses" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="bg-green-600" [ngClass]="buttonClasses + ' ' + submitButtonClasses">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
