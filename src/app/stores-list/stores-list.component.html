@@ -1,1 +1,32 @@
-<p>stores-list works!</p>
+<div class="p-4 bg-card">
+  <!-- Button to toggle Add Store form -->
+  <button (click)="toggleAddStoreForm()" class="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-primary/80 transition">Add Store</button>
+
+  <!-- Conditional display of AddStoreComponent with backdrop blur -->
+  <div *ngIf="showAddStoreForm" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+    <app-add-store (closeForm)="toggleAddStoreForm()"></app-add-store>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="text-center text-blue-600 mb-4">
+    <p>Loading...</p>
+  </div>
+
+  <!-- Stores List Table -->
+  <table *ngIf="!loading" class="min-w-full mt-4 border border-border shadow-lg">
+    <thead class="bg-muted">
+      <tr>
+        <th class="border border-border p-2 text-left">Store No</th>
+        <th class="border border-border p-2 text-left">Store Name</th>
+        <th class="border border-border p-2 text-left">Location</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let store of stores | async">
+        <td class="border border-border p-2">{{ store.storeNo }}</td>
+        <td class="border border-border p-2">{{ store.storeName }}</td>
+        <td class="border border-border p-2">{{ store.location }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
