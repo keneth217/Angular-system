@@ -1,1 +1,30 @@
-<p>creditor-list works!</p>
+<div class="p-4 bg-card">
+  <!-- Button to toggle Add Category form -->
+  <button (click)="toggleCreditorForm()" class="bg-blue-700 text-white px-4 py-2 rounded-md hover:bg-primary/80 transition">Add Category</button>
+
+  <!-- Conditional display of AddCategoryComponent with backdrop blur -->
+  <div *ngIf="showAddCategoryForm" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+    <app-add-creditor (closeForm)="toggleCreditorForm()"></app-add-creditor>
+  </div>
+
+  <!-- Loading text while data is being fetched -->
+  <div *ngIf="isLoading" class="text-center text-gray-500">Loading...</div>
+
+  <!-- Categories List Table -->
+  <table *ngIf="!isLoading" class="min-w-full mt-4 border border-border shadow-lg">
+    <thead class="bg-muted">
+      <tr>
+        <th class="border border-border p-2 text-left">ID</th>
+        <th class="border border-border p-2 text-left">Name</th>
+        <th class="border border-border p-2 text-left">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of creditors | async">
+        <td class="border border-border p-2">{{category.id}}</td>
+        <td class="border border-border p-2">{{category.name}}</td>
+        <td class="border border-border p-2">{{category.phone}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
