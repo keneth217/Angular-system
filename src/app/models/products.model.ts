@@ -1,5 +1,4 @@
 export interface Product {
-qty: any;
 id: any;
   batch: string;
   name: string;
