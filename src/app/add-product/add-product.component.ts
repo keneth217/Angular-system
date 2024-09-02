@@ -2,9 +2,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotificationComponent } from "../notification/notification.component";
+import { Product } from '../models/products.model';
 
 const labelClasses = "block text-sm font-medium text-muted-foreground";
 const inputClasses = "mt-1 block w-full border border-border rounded-md p-2";
@@ -28,16 +30,24 @@ export class AddProductComponent {
   cancelButtonClasses = cancelButtonClasses;
   submitButtonClasses = submitButtonClasses;
 
-
-  productData: any = {};
+  productData: Product | any = {};
   imagePreviewUrl: string | ArrayBuffer | null = null;
   message: string | null = null;
   messageType: 'success' | 'error' | null = null;
   title: string | null = null;
 
+  suppliers$: Observable<any[]> | undefined;
+  categories$: Observable<any[]> | undefined;
+  warehouses$: Observable<any[]> | undefined;
+
   constructor(private productService: ProductsService,
-     private data: AngularFireStorage,
-      private db: AngularFireDatabase) {}
+    private storage: AngularFireStorage,
+    private db: AngularFireDatabase) {
+
+    this.suppliers$ = this.db.list('suppliers').valueChanges();
+    this.categories$ = this.db.list('categories').valueChanges();
+    this.warehouses$ = this.db.list('stores').valueChanges();
+  }
 
   onSubmit(form: any) {
     if (!this.productData.imageUrl) {
@@ -45,41 +55,43 @@ export class AddProductComponent {
       return;
     }
 
-    const productData = {
+    const productData: Product = {
+      id: null, // Set this to a unique value if needed
       batch: form.value.productBatch,
       name: form.value.productName,
       description: form.value.productDescription,
       costPrice: form.value.costPrice,
       sellingPrice: form.value.sellingPrice,
-      quantity: form.value.qty,
-      supplier: form.value.supplier,
+      quantity: form.value.quantity,
       category: form.value.category,
       warehouse: form.value.warehouse,
       expiryDate: form.value.expiryDate,
       imageUrl: this.productData.imageUrl,
+      supplier:form.value.supplier
     };
-    this.productService.addProduct(productData)
-    .then(() => {
-      this.setMessage('Product added successfully!', 'success', 'Success');
-      form.reset();
-      this.imagePreviewUrl = null;
-      this.closeForm.emit();
-    })
-    .catch((error: any) => {
-      this.setMessage('Error adding product: ' + error.message, 'error', 'Error');
-    });
-}
 
-setMessage(message: string, type: 'success' | 'error', title: string) {
-  this.message = message;
-  this.messageType = type;
-  this.title = title;
-  setTimeout(() => {
-    this.message = null;
-    this.messageType = null;
-    this.title = null;
-  }, 2000);
-}
+    this.productService.addProduct(productData)
+      .then(() => {
+        this.setMessage('Product added successfully!', 'success', 'Success');
+        form.reset();
+        this.imagePreviewUrl = null;
+        this.closeForm.emit();
+      })
+      .catch((error: any) => {
+        this.setMessage('Error adding product: ' + error.message, 'error', 'Error');
+      });
+  }
+
+  setMessage(message: string, type: 'success' | 'error', title: string) {
+    this.message = message;
+    this.messageType = type;
+    this.title = title;
+    setTimeout(() => {
+      this.message = null;
+      this.messageType = null;
+      this.title = null;
+    }, 2000);
+  }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -92,15 +104,18 @@ setMessage(message: string, type: 'success' | 'error', title: string) {
     reader.readAsDataURL(file);
 
     const filePath = `products/${file.name}`;
-    const fileRef = this.data.ref(filePath);
-    const uploadTask = this.data.upload(filePath, file);
+    const fileRef = this.storage.ref(filePath);
+    const uploadTask = this.storage.upload(filePath, file);
 
     uploadTask.snapshotChanges().toPromise().then(() => {
       fileRef.getDownloadURL().toPromise().then((url: any) => {
         this.productData.imageUrl = url;
-        console.log('Image uploaded and URL retrieved:', url);
-      }).catch((error: any) => console.error('Error getting download URL: ', error));
-    }).catch((error: any) => console.error('Error uploading image: ', error));
+      }).catch((error) => {
+        console.error('Error getting download URL:', error);
+      });
+    }).catch((error: any) => {
+      console.error('Error uploading image:', error);
+    });
   }
 
   onCancel() {
