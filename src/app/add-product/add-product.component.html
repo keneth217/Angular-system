@@ -30,25 +30,24 @@
 
       <div class="mb-4">
         <label [ngClass]="labelClasses" for="cost-price">Cost Price</label>
-        <input type="text" id="cost-price" [ngClass]="inputClasses" placeholder="e.g. N2000" name="costPrice" ngModel />
+        <input type="number" id="cost-price" [ngClass]="inputClasses" placeholder="e.g. 2000" name="costPrice" ngModel />
       </div>
 
       <div class="mb-4">
         <label [ngClass]="labelClasses" for="selling-price">Selling Price</label>
-        <input type="text" id="selling-price" [ngClass]="inputClasses" placeholder="e.g. N2500" name="sellingPrice" ngModel />
+        <input type="number" id="selling-price" [ngClass]="inputClasses" placeholder="e.g. 2500" name="sellingPrice" ngModel />
       </div>
 
       <div class="mb-4">
-        <label [ngClass]="labelClasses" for="qty">Qty (Cartons)</label>
-        <input type="text" id="qty" [ngClass]="inputClasses" placeholder="e.g. 10" name="qty" ngModel />
+        <label [ngClass]="labelClasses" for="quantity">Quantityty (Cartons)</label>
+        <input type="number" id="quantity" [ngClass]="inputClasses" placeholder="e.g. 10" name="quantity" ngModel />
       </div>
 
       <div class="mb-4">
         <label [ngClass]="labelClasses" for="supplier">Supplier</label>
         <select id="supplier" [ngClass]="inputClasses" name="supplier" ngModel>
           <option value="" disabled selected>Choose...</option>
-          <option>Supplier 1</option>
-          <option>Supplier 2</option>
+          <option *ngFor="let supplier of suppliers$ | async" [value]="supplier.name">{{ supplier.name }}</option>
         </select>
       </div>
 
@@ -56,8 +55,7 @@
         <label [ngClass]="labelClasses" for="category">Category</label>
         <select id="category" [ngClass]="inputClasses" name="category" ngModel>
           <option value="" disabled selected>Choose...</option>
-          <option>Category 1</option>
-          <option>Category 2</option>
+          <option *ngFor="let category of categories$ | async" [value]="category.name">{{ category.name }}</option>
         </select>
       </div>
 
@@ -65,8 +63,7 @@
         <label [ngClass]="labelClasses" for="warehouse">Warehouse</label>
         <select id="warehouse" [ngClass]="inputClasses" name="warehouse" ngModel>
           <option value="" disabled selected>Choose...</option>
-          <option>Warehouse 1</option>
-          <option>Warehouse 2</option>
+          <option *ngFor="let warehouse of warehouses$ | async" [value]="warehouse.storeName">{{ warehouse.storeName }}</option>
         </select>
       </div>
 
